@@ -29,7 +29,7 @@ export default function RiwayatCutiAdmin() {
     try {
       const token = localStorage.getItem("token");
       const res = await axios.get(
-       "https://web-absensi-backend-production.up.railway.app/api/ajuancuti/manage",
+        "https://web-absensi-backend-production.up.railway.app/api/ajuancuti/manage",
         { headers: { Authorization: `Bearer ${token}` } }
       );
       setList(res.data);
@@ -46,7 +46,7 @@ export default function RiwayatCutiAdmin() {
     try {
       const token = localStorage.getItem("token");
       await axios.put(
-        `https://web-absensi-backend-production.up.railway.app/api/ajuancuti/update/${id}`
+        `https://web-absensi-backend-production.up.railway.app/api/ajuancuti/update/${id}`,
         { status },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -79,8 +79,7 @@ export default function RiwayatCutiAdmin() {
     i.user?.nama.toLowerCase().includes(search.toLowerCase())
   );
   filtered = filtered.sort((a, b) => {
-    const va = new Date(a[sortField]),
-      vb = new Date(b[sortField]);
+    const va = new Date(a[sortField]), vb = new Date(b[sortField]);
     if (va < vb) return sortOrder === "asc" ? -1 : 1;
     if (va > vb) return sortOrder === "asc" ? 1 : -1;
     return 0;
@@ -91,15 +90,11 @@ export default function RiwayatCutiAdmin() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-100 to-white p-4">
       <div className="max-w-5xl mx-auto space-y-6">
-        {/* Hero */}
         <div className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-6 rounded-2xl shadow-xl">
           <h1 className="text-2xl font-bold">Kelola Pengajuan Cuti</h1>
-          <p className="mt-1 opacity-80">
-            Setujui atau tolak permintaan cuti karyawan.
-          </p>
+          <p className="mt-1 opacity-80">Setujui atau tolak permintaan cuti karyawan.</p>
         </div>
 
-        {/* Filter */}
         <div className="bg-white/50 backdrop-blur-sm rounded-2xl p-5 shadow-md grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-4">
           <div className="relative">
             <FaSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" />
@@ -119,18 +114,11 @@ export default function RiwayatCutiAdmin() {
           </button>
         </div>
 
-        {/* Table */}
         <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
           <table className="min-w-full">
             <thead className="bg-gray-50">
               <tr>
-                {[
-                  ["Tanggal", "createdAt"],
-                  ["Nama", "user.nama"],
-                  ["Jenis Cuti", "jenisCuti"],
-                  ["Status", "status"],
-                  ["Aksi", null],
-                ].map(([label, field], idx) => (
+                {[["Tanggal", "createdAt"], ["Nama", "user.nama"], ["Jenis Cuti", "jenisCuti"], ["Status", "status"], ["Aksi", null]].map(([label, field], idx) => (
                   <th
                     key={idx}
                     onClick={field ? () => handleSort(field) : undefined}
@@ -168,13 +156,8 @@ export default function RiwayatCutiAdmin() {
                       </tr>
                     ))
                 : paged.map((item, i) => (
-                    <tr
-                      key={item._id}
-                      className={i % 2 === 0 ? "bg-white" : "bg-gray-50"}
-                    >
-                      <td className="px-4 py-3">
-                        {new Date(item.createdAt).toLocaleDateString("id-ID")}
-                      </td>
+                    <tr key={item._id} className={i % 2 === 0 ? "bg-white" : "bg-gray-50"}>
+                      <td className="px-4 py-3">{new Date(item.createdAt).toLocaleDateString("id-ID")}</td>
                       <td className="px-4 py-3">{item.user.nama}</td>
                       <td className="px-4 py-3 capitalize">{item.jenisCuti}</td>
                       <td className="px-4 py-3">
@@ -191,10 +174,7 @@ export default function RiwayatCutiAdmin() {
                         </span>
                       </td>
                       <td className="px-4 py-3">
-                        <button
-                          onClick={() => setSelected(item)}
-                          className="text-purple-600 hover:text-purple-800 text-sm"
-                        >
+                        <button onClick={() => setSelected(item)} className="text-purple-600 hover:text-purple-800 text-sm">
                           Lihat Detail
                         </button>
                       </td>
@@ -204,42 +184,24 @@ export default function RiwayatCutiAdmin() {
           </table>
         </div>
 
-        {/* Pagination */}
         {!loading && pages > 1 && (
           <div className="flex justify-center items-center gap-3 text-sm mt-4">
-            <button
-              disabled={page === 1}
-              onClick={() => setPage((p) => p - 1)}
-              className="px-3 py-1 bg-gray-200 rounded-lg hover:bg-gray-300 disabled:opacity-50"
-            >
+            <button disabled={page === 1} onClick={() => setPage((p) => p - 1)} className="px-3 py-1 bg-gray-200 rounded-lg hover:bg-gray-300 disabled:opacity-50">
               Prev
             </button>
-            <span>
-              {page} / {pages}
-            </span>
-            <button
-              disabled={page === pages}
-              onClick={() => setPage((p) => p + 1)}
-              className="px-3 py-1 bg-gray-200 rounded-lg hover:bg-gray-300 disabled:opacity-50"
-            >
+            <span>{page} / {pages}</span>
+            <button disabled={page === pages} onClick={() => setPage((p) => p + 1)} className="px-3 py-1 bg-gray-200 rounded-lg hover:bg-gray-300 disabled:opacity-50">
               Next
             </button>
           </div>
         )}
 
-        {/* Detail Modal */}
         {selected && (
           <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50">
             <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg overflow-auto max-h-[80vh]">
               <div className="flex justify-between items-center px-6 py-3 border-b">
-                <h3 className="text-l font-semibold leading-snug">
-                  Detail Pengajuan Cuti
-                </h3>
-                <button
-                  onClick={() => setSelected(null)}
-                  className="text-gray-600 hover:text-gray-800 focus:outline-none"
-                  aria-label="Close"
-                >
+                <h3 className="text-l font-semibold leading-snug">Detail Pengajuan Cuti</h3>
+                <button onClick={() => setSelected(null)} className="text-gray-600 hover:text-gray-800 focus:outline-none" aria-label="Close">
                   <FaTimes size={20} />
                 </button>
               </div>
@@ -263,41 +225,25 @@ export default function RiwayatCutiAdmin() {
                 </div>
                 <div>
                   <dt className="font-semibold">Mulai</dt>
-                  <dd>
-                    {new Date(selected.tanggalMulai).toLocaleDateString(
-                      "id-ID"
-                    )}
-                  </dd>
+                  <dd>{new Date(selected.tanggalMulai).toLocaleDateString("id-ID")}</dd>
                 </div>
                 <div>
                   <dt className="font-semibold">Selesai</dt>
-                  <dd>
-                    {new Date(selected.tanggalSelesai).toLocaleDateString(
-                      "id-ID"
-                    )}
-                  </dd>
+                  <dd>{new Date(selected.tanggalSelesai).toLocaleDateString("id-ID")}</dd>
                 </div>
                 <div className="md:col-span-2">
                   <dt className="font-semibold">Alasan</dt>
                   <dd>
-                    <div className="mt-1 bg-gray-100 p-4 rounded-lg max-h-40 overflow-y-auto">
-                      {selected.alasan}
-                    </div>
+                    <div className="mt-1 bg-gray-100 p-4 rounded-lg max-h-40 overflow-y-auto">{selected.alasan}</div>
                   </dd>
                 </div>
               </div>
               {selected.status === "Pending" && (
                 <div className="px-6 py-4 border-t flex justify-end gap-3">
-                  <button
-                    onClick={() => updateStatus(selected._id, "Rejected")}
-                    className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
-                  >
+                  <button onClick={() => updateStatus(selected._id, "Rejected")} className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600">
                     Tolak
                   </button>
-                  <button
-                    onClick={() => updateStatus(selected._id, "Approved")}
-                    className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700"
-                  >
+                  <button onClick={() => updateStatus(selected._id, "Approved")} className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700">
                     Setujui
                   </button>
                 </div>
