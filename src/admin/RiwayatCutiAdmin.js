@@ -29,7 +29,7 @@ export default function RiwayatCutiAdmin() {
     try {
       const token = localStorage.getItem("token");
       const res = await axios.get(
-        "http://localhost:8000/api/ajuancuti/manage",
+       "https://web-absensi-backend-production.up.railway.app/api/ajuancuti/manage"
         { headers: { Authorization: `Bearer ${token}` } }
       );
       setList(res.data);
@@ -46,7 +46,7 @@ export default function RiwayatCutiAdmin() {
     try {
       const token = localStorage.getItem("token");
       await axios.put(
-        `http://localhost:8000/api/ajuancuti/update/${id}`,
+        `https://web-absensi-backend-production.up.railway.app/api/ajuancuti/update/${id}`
         { status },
         { headers: { Authorization: `Bearer ${token}` } }
       );
