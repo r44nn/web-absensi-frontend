@@ -29,7 +29,7 @@ export default function RiwayatCutiAdmin() {
     try {
       const token = localStorage.getItem("token");
       const res = await axios.get(
-       "https://web-absensi-backend-production.up.railway.app/api/ajuancuti/manage"
+       "https://web-absensi-backend-production.up.railway.app/api/ajuancuti/manage",
         { headers: { Authorization: `Bearer ${token}` } }
       );
       setList(res.data);
