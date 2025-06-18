@@ -8,7 +8,7 @@ export default function Absensi() {
 
   const fetchUser = async () => {
     const token = localStorage.getItem("token");
-    const res = await axios.get("http://localhost:8000/api/auth/me", {
+    const res = await axios.get("https://web-absensi-backend-production.up.railway.app/api/auth/me", {
       headers: { Authorization: `Bearer ${token}` },
     });
     setUser(res.data);
@@ -16,7 +16,7 @@ export default function Absensi() {
 
   const fetchRiwayat = async () => {
     const token = localStorage.getItem("token");
-    const res = await axios.get("http://localhost:8000/api/absensi/history", {
+    const res = await axios.get("https://web-absensi-backend-production.up.railway.app/api/absensi/history", {
       headers: { Authorization: `Bearer ${token}` },
     });
     setRiwayat(res.data);
@@ -31,7 +31,7 @@ export default function Absensi() {
     const token = localStorage.getItem("token");
     try {
       await axios.post(
-        "http://localhost:8000/api/absensi/checkin",
+       "https://web-absensi-backend-production.up.railway.app/api/absensi/checkin",
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -46,7 +46,7 @@ export default function Absensi() {
     const token = localStorage.getItem("token");
     try {
       await axios.post(
-        "http://localhost:8000/api/absensi/checkout",
+        "https://web-absensi-backend-production.up.railway.app/api/absensi/checkout",
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );
