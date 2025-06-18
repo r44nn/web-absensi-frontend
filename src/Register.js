@@ -22,7 +22,10 @@ export default function Register() {
     setSuccess("");
 
     try {
-      await axios.post("http://localhost:8000/api/auth/register", formData);
+      await axios.post(
+        "https://web-absensi-backend-production.up.railway.app/api/auth/register",
+        formData
+      );
       setSuccess("Registrasi berhasil! Silakan login.");
       setTimeout(() => navigate("/"), 1500);
     } catch (err) {
