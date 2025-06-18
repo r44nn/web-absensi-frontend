@@ -19,7 +19,7 @@ export default function GantiPasswordAdmin() {
     try {
       const token = localStorage.getItem("token");
       await axios.put(
-        "http://localhost:8000/api/users/change-password",
+        "https://web-absensi-backend-production.up.railway.app",
         { oldPassword, newPassword },
         { headers: { Authorization: `Bearer ${token}` } }
       );
