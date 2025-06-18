@@ -22,7 +22,7 @@ export default function Cuti() {
 
   const fetchUser = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/api/auth/me", {
+      const res = await axios.get("https://web-absensi-backend-production.up.railway.app/api/auth/me", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setUser(res.data);
@@ -35,7 +35,7 @@ export default function Cuti() {
   const fetchHistory = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:8000/api/ajuancuti/history",
+        "https://web-absensi-backend-production.up.railway.app/api/ajuancuti/history",
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -51,7 +51,7 @@ export default function Cuti() {
     e.preventDefault();
     try {
       await axios.post(
-        "http://localhost:8000/api/ajuancuti/submit",
+        "https://web-absensi-backend-production.up.railway.app/api/ajuancuti/submit",
         {
           tanggalMulai: mulai,
           tanggalSelesai: selesai,
