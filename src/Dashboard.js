@@ -12,6 +12,8 @@ import {
   MdOutlineAssignment,
 } from "react-icons/md";
 
+const BASE_URL = "https://web-absensi-backend-production.up.railway.app";
+
 export default function Dashboard() {
   const [user, setUser] = useState({});
   const [rekap, setRekap] = useState({});
@@ -21,19 +23,19 @@ export default function Dashboard() {
     const token = localStorage.getItem("token");
 
     axios
-      .get("http://localhost:8000/api/auth/me", {
+      .get(`${BASE_URL}/api/auth/me`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => setUser(res.data));
 
     axios
-      .get("http://localhost:8000/api/absensi/statistik", {
+      .get(`${BASE_URL}/api/absensi/statistik`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => setRekap(res.data));
 
     axios
-      .get("http://localhost:8000/api/absensi/history", {
+      .get(`${BASE_URL}/api/absensi/history`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => setRiwayat(res.data));
@@ -81,7 +83,7 @@ export default function Dashboard() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <div className="bg-white rounded-2xl shadow-xl p-6 col-span-2 border border-gray-100">
               <p className="text-base text-gray-900 font-medium">
-                Selamat Datang Kembali, Hari ini{" "}
+                Selamat Datang Kembali, Hari ini {" "}
                 {new Date().toLocaleDateString("id-ID", {
                   weekday: "long",
                   day: "numeric",
@@ -233,22 +235,13 @@ function StatCard({ title, value, color, icon }) {
   );
 }
 
-function ActionCard({
-  title,
-  subtitle,
-  link,
-  color,
-  footer,
-  footerColor,
-  icon,
-}) {
+function ActionCard({ title, subtitle, link, color, footer, footerColor, icon }) {
   return (
     <a
       href={link}
       className="rounded-2xl overflow-hidden transform transition-transform duration-300 hover:scale-105 shadow-lg border border-gray-100 block"
     >
       <div className={`p-4 ${color} text-white`}>
-        {/* content */}
         <div className="flex items-center gap-3">
           <div className="text-2xl">{icon}</div>
           <div>
