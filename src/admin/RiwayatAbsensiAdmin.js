@@ -29,7 +29,7 @@ export default function RiwayatAbsensiAdmin() {
     try {
       const token = localStorage.getItem("token");
       const res = await axios.get(
-        `http://localhost:8000/api/absensi/admin?nama=${q}&tanggal=${t}`,
+        `https://web-absensi-backend-production.up.railway.app/api/absensi/admin?nama=${q}&tanggal=${t}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -88,7 +88,7 @@ export default function RiwayatAbsensiAdmin() {
     try {
       const token = localStorage.getItem("token");
       const res = await axios.get(
-        `http://localhost:8000/api/absensi/export/excel?nama=${search}&tanggal=${tanggal}&status=${statusFilter}`,
+       `https://web-absensi-backend-production.up.railway.app/api/absensi/export/excel?nama=${search}&tanggal=${tanggal}&status=${statusFilter}`,
         {
           headers: { Authorization: `Bearer ${token}` },
           responseType: "blob",
