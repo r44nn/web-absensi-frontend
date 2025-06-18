@@ -3,6 +3,8 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+const BASE_URL = "https://web-absensi-backend-production.up.railway.app";
+
 export default function GantiPassword() {
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
@@ -23,7 +25,7 @@ export default function GantiPassword() {
       const token = localStorage.getItem("token");
 
       await axios.put(
-        "http://localhost:8000/api/users/change-password",
+        `${BASE_URL}/api/users/change-password`,
         { oldPassword, newPassword },
         { headers: { Authorization: `Bearer ${token}` } }
       );
