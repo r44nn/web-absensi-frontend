@@ -4,6 +4,8 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+const BASE_URL = "https://web-absensi-backend-production.up.railway.app";
+
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -12,14 +14,14 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:8000/api/auth/login", {
+      const res = await axios.post(`${BASE_URL}/api/auth/login`, {
         email,
         password,
       });
       const token = res.data.token;
       localStorage.setItem("token", token);
 
-      const me = await axios.get("http://localhost:8000/api/auth/me", {
+      const me = await axios.get(`${BASE_URL}/api/auth/me`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const userData = me.data;
