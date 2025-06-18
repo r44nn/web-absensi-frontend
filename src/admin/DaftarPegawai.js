@@ -17,7 +17,7 @@ export default function DaftarPegawai() {
     setLoading(true);
     try {
       const token = localStorage.getItem("token");
-      const res = await axios.get("http://localhost:8000/api/users/pegawai", {
+      const res = await axios.get("https://web-absensi-backend-production.up.railway.app/api/users/pegawai", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setPegawai(res.data);
